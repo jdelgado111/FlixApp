@@ -125,7 +125,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    
+
     class ViewHolderImage extends RecyclerView.ViewHolder {
 
         ImageView ivBackdrop;
