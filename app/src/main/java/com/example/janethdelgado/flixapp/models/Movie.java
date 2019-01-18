@@ -12,12 +12,14 @@ public class Movie {
     private String title;
     private String overview;
     private String backdropPath;
+    private double stars;
 
     public Movie (JSONObject jsonObject) throws JSONException {
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
         backdropPath = jsonObject.getString("backdrop_path");
+        stars = jsonObject.getDouble("vote_average");
     }
 
     //takes JSONArray, iterate through array, generate list of Movies
@@ -35,7 +37,7 @@ public class Movie {
     }
 
     public String getBackdropPath() {
-        return String.format("https://image.tmdb.org/t/p/w300/%s", backdropPath);
+        return String.format("https://image.tmdb.org/t/p/w780/%s", backdropPath);
     }
 
     public String getTitle() {
@@ -44,5 +46,9 @@ public class Movie {
 
     public String getOverview() {
         return overview;
+    }
+
+    public double getStars() {
+        return stars;
     }
 }
