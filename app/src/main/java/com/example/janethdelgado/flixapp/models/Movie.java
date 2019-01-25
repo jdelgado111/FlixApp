@@ -3,16 +3,23 @@ package com.example.janethdelgado.flixapp.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Movie {
     private String posterPath;
     private String title;
     private String overview;
     private String backdropPath;
     private double stars;
+    private int movieId;
+
+    //empty constructor needed by the Parceler library
+    public Movie(){
+    }
 
     public Movie (JSONObject jsonObject) throws JSONException {
         posterPath = jsonObject.getString("poster_path");
@@ -20,6 +27,7 @@ public class Movie {
         overview = jsonObject.getString("overview");
         backdropPath = jsonObject.getString("backdrop_path");
         stars = jsonObject.getDouble("vote_average");
+        movieId = jsonObject.getInt("id");
     }
 
     //takes JSONArray, iterate through array, generate list of Movies
@@ -50,5 +58,8 @@ public class Movie {
 
     public double getStars() {
         return stars;
+    }
+
+    public Object getMovieId() { return movieId;
     }
 }

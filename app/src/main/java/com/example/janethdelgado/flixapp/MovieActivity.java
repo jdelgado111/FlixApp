@@ -56,6 +56,7 @@ public class MovieActivity extends AppCompatActivity {
                     movies.addAll(Movie.fromJsonArray(movieJsonArray));
                     //notify adapter that data has changed
                     adapter.notifyDataSetChanged();
+
                     Log.d("smile", movies.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
