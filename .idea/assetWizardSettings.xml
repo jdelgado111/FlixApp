@@ -52,8 +52,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="placeholder" />
-                            <entry key="sourceFile" value="C:\Users\Janeth Delgado\Desktop\android_apps\FlixApp\placeholder.svg" />
+                            <entry key="outputName" value="play_icon" />
+                            <entry key="sourceFile" value="C:\Users\Janeth Delgado\Desktop\android_apps\FlixApp\iconmonstr-video-15.svg" />
                           </map>
                         </option>
                       </PersistentState>

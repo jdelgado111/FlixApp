@@ -10,12 +10,12 @@ import java.util.List;
 
 @Parcel
 public class Movie {
-    private String posterPath;
-    private String title;
-    private String overview;
-    private String backdropPath;
-    private double stars;
-    private int movieId;
+    String posterPath;
+    String title;
+    String overview;
+    String backdropPath;
+    double stars;
+    int movieId;
 
     //empty constructor needed by the Parceler library
     public Movie(){

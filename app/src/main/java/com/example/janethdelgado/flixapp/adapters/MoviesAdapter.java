@@ -23,12 +23,18 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
     List<Movie> movies;
     final int MOVIE = 0, IMAGE = 1;
     final double POPULAR = 7.0;
+    int radius = 40; // corner radius, higher value = more rounded
+    int margin = 10; // crop margin, set to 0 for corners with no crop
 
     public MoviesAdapter(Context context, List<Movie> movies) {
         this.context = context;
@@ -104,17 +110,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     // (holds the view that will be recycled i.e. the individual movies)
     class ViewHolderMovie extends RecyclerView.ViewHolder {
 
-        TextView tvTitle;
-        TextView tvOverview;
-        ImageView ivPoster;
-        RelativeLayout container_movie;
+        @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvOverview) TextView tvOverview;
+        @BindView(R.id.ivPoster) ImageView ivPoster;
+        @BindView(R.id.container_movie) RelativeLayout container_movie;
 
         public ViewHolderMovie(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
-            ivPoster = itemView.findViewById(R.id.ivPoster);
-            container_movie = itemView.findViewById(R.id.container_movie);
+            ButterKnife.bind(this, itemView);
         }
 
         //puts data into viewHolder
@@ -128,7 +131,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
                 imageUrl = movie.getBackdropPath();
 
-            Glide.with(context).load(imageUrl).apply(new RequestOptions().placeholder(R.drawable.placeholder)).into(ivPoster);
+            Glide.with(context).load(imageUrl).apply(new RequestOptions().transform(new RoundedCornersTransformation(radius, margin)).placeholder(R.drawable.placeholder)).into(ivPoster);
 
             //add click listener on the whole row
             container_movie.setOnClickListener(new View.OnClickListener() {
@@ -143,22 +146,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-
+    //this ViewHolder represents item_image.xml
     class ViewHolderImage extends RecyclerView.ViewHolder {
 
-        ImageView ivBackdrop;
-        RelativeLayout container_image;
+        @BindView(R.id.ivBackdrop) ImageView ivBackdrop;
+        @BindView(R.id.container_image) RelativeLayout container_image;
 
         public ViewHolderImage(@NonNull View itemView) {
             super(itemView);
-            ivBackdrop = itemView.findViewById(R.id.ivBackdrop);
-            container_image = itemView.findViewById(R.id.container_image);
+            ButterKnife.bind(this, itemView);
         }
 
         //puts image into viewHolder
         public void setIvBackdrop(final Movie movie) {
             String imageUrl = movie.getBackdropPath();
-            Glide.with(context).load(imageUrl).apply(new RequestOptions().placeholder(R.drawable.placeholder)).into(ivBackdrop);
+            Glide.with(context).load(imageUrl).apply(new RequestOptions().transform(new RoundedCornersTransformation(radius, margin)).placeholder(R.drawable.placeholder)).into(ivBackdrop);
 
             //add click listener on whole image (layout)
             container_image.setOnClickListener(new View.OnClickListener() {
