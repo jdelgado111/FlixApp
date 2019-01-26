@@ -18,6 +18,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import cz.msebera.android.httpclient.Header;
 
 public class DetailActivity extends YouTubeBaseActivity {
@@ -31,6 +35,8 @@ public class DetailActivity extends YouTubeBaseActivity {
     TextView tvOverview;
     RatingBar ratingBar;
     YouTubePlayerView youTubePlayerView;
+    TextView tvLang;
+    TextView tvDate;
 
     Movie movie;
 
@@ -43,12 +49,30 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvOverview = findViewById(R.id.tvOverview);
         ratingBar = findViewById(R.id.ratingBar);
         youTubePlayerView = findViewById(R.id.player);
+        tvLang = findViewById(R.id.tvLang);
+        tvDate = findViewById(R.id.tvDate);
 
         movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
 
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
         ratingBar.setRating((float) movie.getStars());
+
+        //include more detail/info like release date, language, etc
+        String language = movie.getLanguage();
+        tvLang.setText("Language: " + language.toUpperCase());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        //Date date = null;
+        try {
+            Date date = formatter.parse(movie.getDate());
+            formatter = new SimpleDateFormat("EEE MMM dd, yyyy");
+            String dateText = formatter.format(date);
+            tvDate.setText("Release Date: " + dateText);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(String.format(TRAILERS_API, movie.getMovieId()), new JsonHttpResponseHandler() {
@@ -79,8 +103,6 @@ public class DetailActivity extends YouTubeBaseActivity {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
-
-        //include more detail/info like release date, language, show backdrop image here, etc
     }
 
     private void initializeYoutube(final String youTubeKey) {

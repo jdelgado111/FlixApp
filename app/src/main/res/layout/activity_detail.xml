@@ -17,6 +17,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:textSize="30sp"
         android:textColor="@color/white"
         tools:text="Title" />
@@ -28,13 +29,32 @@
         android:layout_height="wrap_content"
         android:isIndicator="true"
         android:numStars="10"
-        android:rating="8.2" />
+        android:rating="8.2"
+        android:layout_marginBottom="5dp" />
 
     <TextView
         android:id="@+id/tvOverview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:textSize="18sp"
         android:textColor="@color/gray"
         tools:text="Overview" />
+
+    <TextView
+        android:id="@+id/tvLang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textSize="18sp"
+        android:textColor="@color/gray"
+        tools:text="Language" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/gray"
+        tools:text="Release Date" />
 </LinearLayout>
